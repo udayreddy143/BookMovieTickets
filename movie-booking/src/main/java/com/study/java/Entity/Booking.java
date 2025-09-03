@@ -1,7 +1,6 @@
 package com.study.java.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 @Entity
 public class Booking {
@@ -10,8 +9,8 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userName;
-    private Integer seatsBooked;
+    private Long userId;
+    private Integer seatBooked;
 
 
     @ManyToOne
@@ -27,20 +26,20 @@ public class Booking {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Integer getSeatsBooked() {
-        return seatsBooked;
+    public Integer getSeatBooked() {
+        return seatBooked;
     }
 
-    public void setSeatsBooked(Integer seatsBooked) {
-        this.seatsBooked = seatsBooked;
+    public void setSeatBooked(Integer seatBooked) {
+        this.seatBooked = seatBooked;
     }
 
     public Movie getMovie() {

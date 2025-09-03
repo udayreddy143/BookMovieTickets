@@ -38,7 +38,7 @@ public class MovieService {
         // Calculate booked seats (using loop instead of streams)
         int bookedSeats = 0;
         for (Booking booking : bookings) {
-            bookedSeats += booking.getSeatsBooked();
+            bookedSeats += booking.getSeatBooked();
         }
 
         int availableSeats = movie.getTotalSeats() - bookedSeats;

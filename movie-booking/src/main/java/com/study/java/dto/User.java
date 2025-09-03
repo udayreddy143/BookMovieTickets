@@ -1,4 +1,4 @@
-package com.jjs.Moviebook.Entity;
+package com.study.java.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,14 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "user_details")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String userName;
 	private String email;

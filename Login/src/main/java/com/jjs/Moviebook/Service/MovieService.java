@@ -1,6 +1,8 @@
 package com.jjs.Moviebook.Service;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +48,19 @@ public class MovieService {
 	public User updateProfile(User updatedUser) {
         return movierepository.save(updatedUser);
     }
+
+	public List<User> fetchUserDetails(List<Integer> userList) {
+
+		List<User> userList1 = new ArrayList<>();  // craeted A.L obj
+
+		for(Integer user: userList) {
+			Optional<User> optionalUser  =movierepository.findById(Long.valueOf(user));
+			if(optionalUser.isPresent()) {
+				userList1.add(optionalUser.get());
+			}
+		}
+		return  userList1;
+	}
+
 
 }

@@ -17,7 +17,7 @@ import com.jjs.Moviebook.Entity.User;
 import com.jjs.Moviebook.Service.MovieService;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/user")
 public class Moviecontroller {
 	@Autowired
 	private MovieService movieservice;
@@ -43,5 +43,11 @@ public class Moviecontroller {
     @PutMapping("/update-profile")
     public User updateProfile(@RequestBody User user) {
         return movieservice.updateProfile(user);
+    }
+
+
+    @GetMapping("/fetchUserDetails")
+    public List<User> fetchUserDetails(@RequestParam("userIds") List<Integer> userIds) {
+        return movieservice.fetchUserDetails(userIds);
     }
 }
