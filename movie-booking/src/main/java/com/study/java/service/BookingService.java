@@ -4,6 +4,7 @@ import com.study.java.Entity.Booking;
 import com.study.java.Entity.Movie;
 import com.study.java.dto.MovieDetailsDto;
 import com.study.java.dto.User;
+import com.study.java.feignclient.RegistrationFeignClient;
 import com.study.java.repository.BookingRepository;
 import com.study.java.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class BookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private RegistrationFeignClient registrationFeignClient;
 
     public MovieDetailsDto  bookSeats(String movieName, String userId, int seats) {
 
@@ -88,24 +92,50 @@ public class BookingService {
 
        // [1,3,4,5]  ====> 1,3,4,5
 
-        StringBuilder builder = new StringBuilder();
-        int count =0;
-        for(Long id: userList) {
+//        StringBuilder builder = new StringBuilder();
+//        int count =0;
+//        for(Long id: userList) {
+//
+//            builder.append(id);
+//            if(count<userList.size()-1) {  // size=4
+//               builder .append(",");
+//            }
+//
+//                count++;
+//        }  //1
+     //   String url = "http://localhost:9091/user/fetchUserDetails?userIds="+builder.toString();
 
-            builder.append(id);
-            if(count<userList.size()-1) {  // size=4
-               builder .append(",");
-            }
+        List<User> userlist = registrationFeignClient.fetchuserDetails(userList);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.set("Accept","application/json");
+//        HttpEntity<String> entity = new HttpEntity<>(headers);
+//        ResponseEntity<List> response = template.exchange(url, HttpMethod.GET,entity,List.class);
 
-                count++;
-        }  //1
-        String url = "http://localhost:9091/user/fetchUserDetails?userIds="+builder.toString();
+        // call feign service
+        return userlist;
+    }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Accept","application/json");
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<List> response = template.exchange(url, HttpMethod.GET,entity,List.class);
+    // i will userdetails and call the singnup api to register the user
 
-        return response.getBody();
+    public User saveUserDetails(User user){
+
+        //writer restemplate to call registration service to push data from this service
+        ////url: http://localhost:9091/user/signup
+        // Post
+        // userData
+        // expecting userINFO
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.set("Accept","application/json");
+//        HttpEntity<User> entity = new HttpEntity<>(user,headers);
+//        String url="http://localhost:9091/user/signup";
+//        RestTemplate template =new RestTemplate();
+//        ResponseEntity<User> userInfo = template.exchange(url,HttpMethod.POST,entity,User.class);
+
+
+        //call feign service
+
+        return  registrationFeignClient.saveUserDetails(user);
+      //  return userInfo.getBody();
+
     }
 }

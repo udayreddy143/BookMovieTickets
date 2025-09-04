@@ -7,6 +7,7 @@ import com.study.java.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,9 +34,15 @@ public class BookingController {
 public List<User> getAllBookingDetails( ){
     return bookingService.getAllBookilngDetails();
 }
+//
+//    @GetMapping
+//    public User getBYBookId(@RequestParam Long bookiungId ){
+//        return bookingService.getAllBookilngDetails();
+//    }
 
-    @GetMapping
-    public User getBYBookId(@RequestParam Long userId ){
-        return bookingService.getAllBookilngDetails();
+    @PostMapping("/saveUserDetails")
+    public User saveUserDetails(@RequestBody  User user){
+        return bookingService.saveUserDetails(user);
+
     }
 }
