@@ -9,16 +9,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements Serializable {
+
+
+	private static final long serialVersionUID = 123L;
+
 	private Long id;
 	private String userName;
 	private String email;
 	private String password;
 	private Long phoneNumber;
+
 
 	public Long getId() {
 		return id;
