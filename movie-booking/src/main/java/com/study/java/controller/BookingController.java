@@ -45,4 +45,13 @@ public List<User> getAllBookingDetails( ){
         return bookingService.saveUserDetails(user);
 
     }
+    DeleteMapping("/deleteUser/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(bookingService.deleteUser(userId));
+    }
+
+    @PutMapping("/updateUser")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        return ResponseEntity.ok(bookingService.updateUserProfile(user));
+    }
 }

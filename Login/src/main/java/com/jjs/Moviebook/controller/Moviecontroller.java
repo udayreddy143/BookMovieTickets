@@ -50,4 +50,16 @@ public class Moviecontroller {
     public List<User> fetchUserDetails(@RequestParam("userIds") List<Integer> userIds) {
         return movieservice.fetchUserDetails(userIds);
     }
+	@DeleteMapping("/delete/{userId}")
+    public String deleteUser(@PathVariable Long userId) {
+        // here you delete user from DB
+        return "User with ID " + userId + " deleted successfully!";
+    }
+
+    @PutMapping("/updateProfile")
+    public User updateProfile(@RequestBody User user) {
+        // here you update user in DB
+        user.setName(user.getName() + " (updated)");
+        return user;
+    }
 }
