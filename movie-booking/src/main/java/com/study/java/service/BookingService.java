@@ -136,6 +136,14 @@ public class BookingService {
 
         return  registrationFeignClient.saveUserDetails(user);
       //  return userInfo.getBody();
+ // Delete user info
+    public String deleteUser(Long userId) {
+        return registrationFeignClient.deleteUser(userId);
+    }
 
+    // Update user profile
+    public User updateUserProfile(User user) {
+        return registrationFeignClient.updateProfile(user);
+    }
     }
 }
