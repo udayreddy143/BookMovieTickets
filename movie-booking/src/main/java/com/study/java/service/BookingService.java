@@ -168,7 +168,7 @@ public class BookingService {
 
     // i will userdetails and call the singnup api to register the user
 
-    public User saveUserDetails(User user){
+    public User saveUserDetails(User user) {
 
         //writer restemplate to call registration service to push data from this service
         ////url: http://localhost:9091/user/signup
@@ -185,16 +185,17 @@ public class BookingService {
 
         //call feign service
 
-        return  registrationFeignClient.saveUserDetails(user);
-      //  return userInfo.getBody();
- // Delete user info
+        return registrationFeignClient.saveUserDetails(user);
+        //  return userInfo.getBody();
+        // Delete user info
+    }
     public String deleteUser(Long userId) {
-        return registrationFeignClient.deleteUser(userId);
+        return registrationFeignClient.deleteuserDetails(userId);
     }
 
     // Update user profile
     public User updateUserProfile(User user) {
-        return registrationFeignClient.updateProfile(user);
+        return registrationFeignClient.updateUserDetails(user);
     }
     }
-}
+
