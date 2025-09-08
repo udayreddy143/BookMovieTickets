@@ -61,6 +61,4 @@ public class MovieService {
 		}
 		return  userList1;
 	}
-
-
 }
