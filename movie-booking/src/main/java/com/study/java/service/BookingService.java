@@ -7,6 +7,7 @@ import com.study.java.dto.User;
 import com.study.java.feignclient.RegistrationFeignClient;
 import com.study.java.repository.BookingRepository;
 import com.study.java.repository.MovieRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpEntity;
@@ -80,8 +81,13 @@ public class BookingService {
 
         return dto;
     }
+public List<User> fallbackeUserDetails(Throwable throwable){
+    System.out.println("error eccoured"+throwable.toString());
+        return List.of();
 
+}
 
+    @CircuitBreaker(name = "userdetails",fallbackMethod = "fallbackeUserDetails")
     public List<User> getAllBookilngDetails(){
 
        List<Booking> bookings = bookingRepository.findAll();
